@@ -5,6 +5,25 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvorionServerManager", "AvorionServerManager\AvorionServerManager.csproj", "{B867A1D7-35E3-490B-843B-5ED172195950}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B31EB82C-C751-48B7-87B2-E1CD1B8E0735}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Pictures\SetupImages\new\AuthTestNoKey.JPG = ..\..\..\..\Pictures\SetupImages\new\AuthTestNoKey.JPG
+		..\..\..\..\Pictures\SetupImages\new\AuthTestSuccess.JPG = ..\..\..\..\Pictures\SetupImages\new\AuthTestSuccess.JPG
+		..\..\..\..\Pictures\SetupImages\new\avorionFolder.JPG = ..\..\..\..\Pictures\SetupImages\new\avorionFolder.JPG
+		..\..\..\..\Pictures\SetupImages\new\broadcastcommand.JPG = ..\..\..\..\Pictures\SetupImages\new\broadcastcommand.JPG
+		..\..\..\..\Pictures\SetupImages\new\certs.JPG = ..\..\..\..\Pictures\SetupImages\new\certs.JPG
+		..\..\..\..\Pictures\SetupImages\new\chat.JPG = ..\..\..\..\Pictures\SetupImages\new\chat.JPG
+		..\..\..\..\Pictures\SetupImages\new\lateAdmin.JPG = ..\..\..\..\Pictures\SetupImages\new\lateAdmin.JPG
+		..\..\..\..\Pictures\SetupImages\new\lateAdminResult.JPG = ..\..\..\..\Pictures\SetupImages\new\lateAdminResult.JPG
+		..\..\..\..\Pictures\SetupImages\new\pluralsight1.JPG = ..\..\..\..\Pictures\SetupImages\new\pluralsight1.JPG
+		..\..\..\..\Pictures\SetupImages\new\PostmanAuthHeader.JPG = ..\..\..\..\Pictures\SetupImages\new\PostmanAuthHeader.JPG
+		..\..\..\..\Pictures\SetupImages\new\ServerLua.JPG = ..\..\..\..\Pictures\SetupImages\new\ServerLua.JPG
+		..\..\..\..\Pictures\SetupImages\new\startServer.JPG = ..\..\..\..\Pictures\SetupImages\new\startServer.JPG
+		..\..\..\..\Pictures\SetupImages\new\UrlHeaderCommands.JPG = ..\..\..\..\Pictures\SetupImages\new\UrlHeaderCommands.JPG
+		..\..\..\..\Pictures\SetupImages\new\WebAPI.JPG = ..\..\..\..\Pictures\SetupImages\new\WebAPI.JPG
+		..\..\..\..\Pictures\SetupImages\new\webapiServerInfo.JPG = ..\..\..\..\Pictures\SetupImages\new\webapiServerInfo.JPG
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
