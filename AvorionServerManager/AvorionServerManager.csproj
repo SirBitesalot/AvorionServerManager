@@ -158,6 +158,21 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\CopyHelper.cs" />
     <Compile Include="Utils\StringUtils.cs" />
+    <Content Include="Images\AuthTestNoKey.JPG" />
+    <Content Include="Images\AuthTestSuccess.JPG" />
+    <Content Include="Images\avorionFolder.JPG" />
+    <Content Include="Images\broadcastcommand.JPG" />
+    <Content Include="Images\certs.JPG" />
+    <Content Include="Images\chat.JPG" />
+    <Content Include="Images\lateAdmin.JPG" />
+    <Content Include="Images\lateAdminResult.JPG" />
+    <Content Include="Images\pluralsight1.JPG" />
+    <Content Include="Images\PostmanAuthHeader.JPG" />
+    <Content Include="Images\ServerLua.JPG" />
+    <Content Include="Images\startServer.JPG" />
+    <Content Include="Images\UrlHeaderCommands.JPG" />
+    <Content Include="Images\WebAPI.JPG" />
+    <Content Include="Images\webapiServerInfo.JPG" />
     <Content Include="THIRD-PARTY-NOTICES.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
