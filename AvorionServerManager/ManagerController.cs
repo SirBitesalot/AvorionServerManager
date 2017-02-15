@@ -217,24 +217,33 @@ namespace AvorionServerManager
                     _backupTimer.Elapsed += _backupTimer_Elapsed;
                     _backupTimer.Start();
                 }
-                ServerProcessRunning = true;
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = false; //required to redirect standart input/output
-                startInfo.RedirectStandardInput = true;
-                startInfo.RedirectStandardOutput = true;
-                startInfo.RedirectStandardError = true;
-                _logfile = "Avorion_redirectedLog" + DateTime.Now.ToString("MMddyyyy-hhmmss");
-                startInfo.FileName = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
-                startInfo.WorkingDirectory = ManagerSettings.AvorionFolder;
-                startInfo.Arguments = ServerSettings.GetCommandLine();
-                startInfo.StandardOutputEncoding = Encoding.UTF8;
-                _process = new Process();
-                _process.StartInfo = startInfo;
+                string tmpAvorionServerExe = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
+                if (File.Exists(tmpAvorionServerExe))
+                {
+                    ServerProcessRunning = true;
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.UseShellExecute = false; //required to redirect standart input/output
+                    startInfo.RedirectStandardInput = true;
+                    startInfo.RedirectStandardOutput = true;
+                    startInfo.RedirectStandardError = true;
+                    _logfile = "Avorion_redirectedLog" + DateTime.Now.ToString("MMddyyyy-hhmmss");
+                    startInfo.FileName = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
+                    startInfo.WorkingDirectory = ManagerSettings.AvorionFolder;
+                    startInfo.Arguments = ServerSettings.GetCommandLine();
+                    startInfo.StandardOutputEncoding = Encoding.UTF8;
+                    _process = new Process();
+                    _process.StartInfo = startInfo;
 
-                _process.Start();
-                Thread listenThread = new Thread(ProcessOutputListenerLoop);
-                listenThread.IsBackground = true;
-                listenThread.Start();
+                    _process.Start();
+                    Thread listenThread = new Thread(ProcessOutputListenerLoop);
+                    listenThread.IsBackground = true;
+                    listenThread.Start();
+                }
+                else
+                {
+                    MessageBox.Show("Can not find File: "+tmpAvorionServerExe+Environment.NewLine+ "Please make sure the server is installed correctly and the Avorion Folder in the Manager Settings is correct. Use the Help in the Tools section for Instructions.");
+                    ServerStoppedEvent(this, new ServerStoppedEventArgs());
+                }
             }else
             {
                 ServerStoppedEvent(this, new ServerStoppedEventArgs());
