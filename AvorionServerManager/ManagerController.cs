@@ -227,6 +227,7 @@ namespace AvorionServerManager
                 startInfo.FileName = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
                 startInfo.WorkingDirectory = ManagerSettings.AvorionFolder;
                 startInfo.Arguments = ServerSettings.GetCommandLine();
+                startInfo.StandardOutputEncoding = Encoding.UTF8;
                 _process = new Process();
                 _process.StartInfo = startInfo;
 
@@ -264,7 +265,9 @@ namespace AvorionServerManager
                 {
                     foreach (string currentParameter in tmpCommand.Parameters)
                     {
-                        _process.StandardInput.WriteLine(currentParameter);
+                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(currentParameter);
+                        _process.StandardInput.BaseStream.Write(buffer, 0, buffer.Length);
+                        _process.StandardInput.WriteLine();
                     }
                 }
             }
