@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvorionServerManager.Utils
+namespace AvorionServerManager.Core
 {
     public static class StringUtils
     {

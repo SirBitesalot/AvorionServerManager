@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using AvorionServerManager.Server;
+using AvorionServerManager.Core;
 namespace AvorionServerManager
 {
-    public class ManagerController
+    public class ManagerController : ILoggable
     {
         #region private Variables
         
@@ -32,14 +33,15 @@ namespace AvorionServerManager
         public bool BackupSettingsLoadedFromFile { get; set; }
         public bool ManagerSettingsLoadedFromFile { get; set; }
         public ManagerSettings ManagerSettings;
+        public AvorionServer Server { get; private set; }//This will change preferably so that multiple server/profiles are possible
         #endregion
 
         #region Public Eventing
-        public delegate void LogMessageReceived(object sender, LogMessageReceivedEventArgs e);
-        public event LogMessageReceived LogMessageRecievedEvent;
-
+        //TODO get rid of this
         public delegate void ServerStopped(object sender, ServerStoppedEventArgs e);
         public event ServerStopped ServerStoppedEvent;
+
+        public event LogEvent LogEvent;
         #endregion
         public ManagerController()
         {
@@ -201,7 +203,12 @@ namespace AvorionServerManager
         }
         public void StartAvorionServer()
         {
-
+            //TODO move all logic to Server.Start()
+            string tmpAvorionServerExe = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
+            if (Server == null)
+            {
+                Server = new AvorionServer(ServerSettings, ManagerSettings.AvorionFolder, tmpAvorionServerExe);
+            }
             if (!ServerProcessRunning&& CheckConfigs())
             {
                 if (BackupSettings.SaveOnStartup)
@@ -217,25 +224,13 @@ namespace AvorionServerManager
                     _backupTimer.Elapsed += _backupTimer_Elapsed;
                     _backupTimer.Start();
                 }
-                string tmpAvorionServerExe = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
+               
                 if (File.Exists(tmpAvorionServerExe))
                 {
                     ServerProcessRunning = true;
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.UseShellExecute = false; //required to redirect standart input/output
-                    startInfo.RedirectStandardInput = true;
-                    startInfo.RedirectStandardOutput = true;
-                    startInfo.RedirectStandardError = true;
-                    _logfile = "Avorion_redirectedLog" + DateTime.Now.ToString("MMddyyyy-hhmmss");
-                    startInfo.FileName = Path.Combine(ManagerSettings.AvorionFolder, "bin", "AvorionServer.exe");
-                    startInfo.WorkingDirectory = ManagerSettings.AvorionFolder;
-                    startInfo.Arguments = ServerSettings.GetCommandLine();
-                    startInfo.StandardOutputEncoding = Encoding.UTF8;
-                    _process = new Process();
-                    _process.StartInfo = startInfo;
-
-                    _process.Start();
-                    Thread listenThread = new Thread(ProcessOutputListenerLoop);
+                    Server.Start();
+                    _process = Server.Process;
+                     Thread listenThread = new Thread(ProcessOutputListenerLoop);
                     listenThread.IsBackground = true;
                     listenThread.Start();
                 }
@@ -258,11 +253,8 @@ namespace AvorionServerManager
 
         private void Log(string entry)
         {
-            LogMessageRecievedEvent(this, new LogMessageReceivedEventArgs(entry));
-            using (StreamWriter writer = File.AppendText(_logfile))
-            {
-                writer.WriteLine(entry);
-            }
+            LogEvent(this, new LogEventEventArgs(LogLevel.Undefined,LogHelper.StandardLogMessage(DateTime.Now,"Server stopped")));
+          
         }
         private void ProcessCommandRequest()
         {
@@ -302,7 +294,7 @@ namespace AvorionServerManager
                     }
                     else
                     {
-                        Log(message);
+                        LogEvent(this, new LogEventEventArgs(LogLevel.Undefined, LogHelper.StandardLogMessage(DateTime.Now, message)));
                     }
                 }
             }
@@ -326,7 +318,7 @@ namespace AvorionServerManager
                 string message = _process.StandardError.ReadLine();
                 if (message != null)
                 {
-                    Log(message);
+                    LogEvent(this, new LogEventEventArgs(LogLevel.Undefined, LogHelper.StandardLogMessage(DateTime.Now, message)));
                 }
             }
         }

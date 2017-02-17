@@ -120,10 +120,8 @@
     <Compile Include="AuthTestController.cs" />
     <Compile Include="AvorionServerCommand.cs" />
     <Compile Include="AvorionServerCommandDefinition.cs" />
-    <Compile Include="AvorionServerSettings.cs" />
     <Compile Include="BackupController.cs" />
     <Compile Include="BackupSettings.cs" />
-    <Compile Include="EventArgs.cs" />
     <Compile Include="LuaFilePatcher.cs" />
     <Compile Include="ManagerController.cs" />
     <Compile Include="Setup\DoItProgressForm.cs">
@@ -142,8 +140,6 @@
     <Compile Include="CommandInputPrompt.cs" />
     <Compile Include="CommandLoader.cs" />
     <Compile Include="CommandsApiData.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="ManagerMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,8 +152,6 @@
     <Compile Include="ServerController.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utils\CopyHelper.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Images\AuthTestNoKey.JPG" />
     <Content Include="Images\AuthTestSuccess.JPG" />
     <Content Include="Images\avorionFolder.JPG" />
@@ -241,6 +235,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AvorionServerManager.Core\AvorionServerManager.Core.csproj">
+      <Project>{62fd8ef5-8965-4007-aa84-01658c10af8f}</Project>
+      <Name>AvorionServerManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AvorionServerManager.Server\AvorionServerManager.Server.csproj">
+      <Project>{76cac8d1-222e-4ddd-89e5-eca91e0e2ecc}</Project>
+      <Name>AvorionServerManager.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

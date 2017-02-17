@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvorionServerManager", "AvorionServerManager\AvorionServerManager.csproj", "{B867A1D7-35E3-490B-843B-5ED172195950}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvorionServerManager.Server", "AvorionServerManager.Server\AvorionServerManager.Server.csproj", "{76CAC8D1-222E-4DDD-89E5-ECA91E0E2ECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvorionServerManager.Core", "AvorionServerManager.Core\AvorionServerManager.Core.csproj", "{62FD8EF5-8965-4007-AA84-01658C10AF8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{B867A1D7-35E3-490B-843B-5ED172195950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B867A1D7-35E3-490B-843B-5ED172195950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B867A1D7-35E3-490B-843B-5ED172195950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76CAC8D1-222E-4DDD-89E5-ECA91E0E2ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76CAC8D1-222E-4DDD-89E5-ECA91E0E2ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76CAC8D1-222E-4DDD-89E5-ECA91E0E2ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76CAC8D1-222E-4DDD-89E5-ECA91E0E2ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FD8EF5-8965-4007-AA84-01658C10AF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FD8EF5-8965-4007-AA84-01658C10AF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FD8EF5-8965-4007-AA84-01658C10AF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FD8EF5-8965-4007-AA84-01658C10AF8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

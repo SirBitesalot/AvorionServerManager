@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using Microsoft.Owin.Hosting;
 using System.Diagnostics;
 using System.Threading;
+using AvorionServerManager.Core;
+using AvorionServerManager.Server;
 
 namespace AvorionServerManager
 {
@@ -48,7 +50,7 @@ namespace AvorionServerManager
         {
             showHelper = true;
             _managerController = new ManagerController();
-            _managerController.LogMessageRecievedEvent += _managerController_LogMessageRecievedEvent;
+            _managerController.LogEvent += _managerController_LogEvent; ;
             _managerController.ServerStoppedEvent += _managerController_ServerStoppedEvent;
             ApplyManagerSettings();
             commandCombobox.Items.AddRange(_managerController.AvailableCommandDefinitions.ToArray());
@@ -62,6 +64,19 @@ namespace AvorionServerManager
             ApplyBackupSettings();
            
         }
+
+        private void _managerController_LogEvent(object sender, Core.LogEventEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                logBox.BeginInvoke((MethodInvoker)delegate () { logBox.AppendText(e.Message + Environment.NewLine); ; });
+            }
+            else
+            {
+                logBox.AppendText(e.Message + Environment.NewLine);
+            }
+        }
+
         private void AddDifficultyDropDownItems()
         {
             difficultyDropDown.Items.Add(DifficultySettings.Beginner);
@@ -110,6 +125,7 @@ namespace AvorionServerManager
                 stopBackupCeckbox.Checked = _managerController.BackupSettings.SaveOnStop;
             }
         }
+
         private void _managerController_ServerStoppedEvent(object sender, ServerStoppedEventArgs e)
         {
             if (InvokeRequired)
@@ -121,18 +137,7 @@ namespace AvorionServerManager
                 startAvorionServerButton.Enabled = true;
             }
         }
-
-        private void _managerController_LogMessageRecievedEvent(object sender, LogMessageReceivedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                richTextBox1.BeginInvoke((MethodInvoker)delegate () { richTextBox1.AppendText(e.Message + Environment.NewLine); ; });
-            }
-            else
-            {
-                richTextBox1.AppendText(e.Message + Environment.NewLine);
-            }
-        }
+    
 
         public void ApplyManagerSettings()
         {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AvorionServerManager.Utils;
+using AvorionServerManager.Core;
 using System.IO;
 using System.Globalization;
 
-namespace AvorionServerManager
+namespace AvorionServerManager.Server
 {
     [Serializable]
     public class AvorionServerSettings

@@ -35,7 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.commandCombobox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.logBox = new System.Windows.Forms.RichTextBox();
             this.startHttpServerButton = new System.Windows.Forms.Button();
             this.startAvorionServerButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -146,7 +146,7 @@
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.logBox);
             this.tabPage1.Controls.Add(this.startHttpServerButton);
             this.tabPage1.Controls.Add(this.startAvorionServerButton);
             this.tabPage1.Controls.Add(this.label4);
@@ -199,13 +199,13 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Log";
             // 
-            // richTextBox1
+            // logBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 82);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(377, 319);
-            this.richTextBox1.TabIndex = 6;
-            this.richTextBox1.Text = "";
+            this.logBox.Location = new System.Drawing.Point(12, 82);
+            this.logBox.Name = "logBox";
+            this.logBox.Size = new System.Drawing.Size(377, 319);
+            this.logBox.TabIndex = 6;
+            this.logBox.Text = "";
             // 
             // startHttpServerButton
             // 
@@ -976,7 +976,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox commandCombobox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox logBox;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button cleanServerLuaButton;
