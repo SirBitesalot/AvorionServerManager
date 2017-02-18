@@ -310,6 +310,7 @@ namespace AvorionServerManager
                 _backupController.CreateBackup(ServerSettings.DataPath, BackupSettings);
             }
             ServerProcessRunning = false;
+            Server.IsRunning = false;
         }
         private void ProcessErrorListenerLoop()
         {

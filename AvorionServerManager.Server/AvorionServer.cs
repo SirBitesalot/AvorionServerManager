@@ -6,12 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AvorionServerManager.Core;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+
 namespace AvorionServerManager.Server
 {
     public class AvorionServer : ILoggable
     {
+        #region DLL Imports
+        [DllImport("user32.dll")]
+        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        static extern short VkKeyScan(char ch);
+        #endregion
         #region Properties
-        public bool IsRunning { get; private set; }
+        public bool IsRunning { get; set; }
         public AvorionServerSettings Settings { get; private set; }
         public Process Process { get; private set; }//TODO make private and do process logic here
         #endregion
@@ -76,6 +86,34 @@ namespace AvorionServerManager.Server
         public void SendCommand()
         {
             throw new NotImplementedException();
+        }
+        public void SendConsoleCommand(string command)
+        {
+            if (IsRunning)
+            {
+                uint WM_KEYDOWN = 0x100;
+                uint WM_KEYUP = 0x0101;
+                IntPtr edit = Process.MainWindowHandle;
+
+
+                foreach (char currentChar in command)
+                {
+                    switch (currentChar)
+                    {
+                        case '/':
+                            PostMessage(edit, WM_KEYDOWN, (IntPtr)(0x6F), IntPtr.Zero);
+                            break;
+                        default:
+                            PostMessage(edit, WM_KEYDOWN, (IntPtr)(VkKeyScan(currentChar)), IntPtr.Zero);
+                            break;
+                    }
+                    Thread.Sleep(10);
+
+                }
+
+                PostMessage(edit, WM_KEYDOWN, (IntPtr)(Keys.Enter), IntPtr.Zero);
+                PostMessage(edit, WM_KEYUP, (IntPtr)(Keys.Enter), IntPtr.Zero);
+            }
         }
         #endregion
         #region Private variables

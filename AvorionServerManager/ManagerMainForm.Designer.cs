@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagerMainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.commandLineBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.commandCombobox = new System.Windows.Forms.ComboBox();
@@ -139,11 +141,13 @@
             this.tabControl1.Location = new System.Drawing.Point(0, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(707, 433);
+            this.tabControl1.Size = new System.Drawing.Size(707, 473);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Controls.Add(this.commandLineBox);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.logBox);
@@ -154,10 +158,27 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(699, 407);
+            this.tabPage1.Size = new System.Drawing.Size(699, 447);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Server";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 404);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(77, 13);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "Command Line";
+            // 
+            // commandLineBox
+            // 
+            this.commandLineBox.Location = new System.Drawing.Point(12, 421);
+            this.commandLineBox.Name = "commandLineBox";
+            this.commandLineBox.Size = new System.Drawing.Size(679, 20);
+            this.commandLineBox.TabIndex = 9;
+            this.commandLineBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.commandLineBox_KeyDown);
             // 
             // groupBox1
             // 
@@ -258,7 +279,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(699, 407);
+            this.tabPage2.Size = new System.Drawing.Size(699, 447);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Manager Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -365,7 +386,7 @@
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(699, 407);
+            this.tabPage4.Size = new System.Drawing.Size(699, 447);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Avorion Settings";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -662,7 +683,7 @@
             this.tabPage5.Controls.Add(this.backupLabel);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(699, 407);
+            this.tabPage5.Size = new System.Drawing.Size(699, 447);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Backup Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -765,7 +786,7 @@
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(699, 407);
+            this.tabPage3.Size = new System.Drawing.Size(699, 447);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Tools";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -923,7 +944,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 433);
+            this.ClientSize = new System.Drawing.Size(707, 473);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ManagerMainForm";
@@ -1035,6 +1056,8 @@
         private System.Windows.Forms.Button createBackupButton;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button showHelpButton;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox commandLineBox;
     }
 }
 

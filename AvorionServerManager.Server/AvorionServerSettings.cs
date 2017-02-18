@@ -334,7 +334,7 @@ namespace AvorionServerManager.Server
             StringBuilder commandLineStringBuilder = new StringBuilder();
             foreach(string currentArgument in guiDefinedArguments)
             {
-                if (AdditionalArguments!=null &&!AdditionalArguments.Contains(currentArgument)){
+                if (AdditionalArguments!=null &&!AdditionalArguments.Contains(currentArgument.Split(' ')[0])){
                     commandLineStringBuilder.Append(currentArgument + " ");
                 }
             }

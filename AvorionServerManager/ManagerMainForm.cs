@@ -22,9 +22,12 @@ namespace AvorionServerManager
         ManagerController _managerController;
         private int _seedLength = 10;
         bool showHelper;
+        List<string> _commandLineHistory;
+        int _commandLineHistoryIndex = -1;
         public ManagerMainForm()
         {
             InitializeComponent();
+            _commandLineHistory = new List<string>();
             if (!Directory.Exists(Constants.SettingsFolderName))
             {
                 Directory.CreateDirectory(Constants.SettingsFolderName);
@@ -402,6 +405,62 @@ namespace AvorionServerManager
         private void HelpForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             showHelper = true;
+        }
+
+        private void commandLineBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_managerController.Server.IsRunning)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    //enter key is down
+                    _managerController.Server.SendConsoleCommand(commandLineBox.Text);
+                    _commandLineHistory.Add(commandLineBox.Text);
+                    _commandLineHistoryIndex = _commandLineHistory.Count;
+                    commandLineBox.Text = string.Empty;
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+
+                }
+                if (e.KeyCode == Keys.Up)
+                {
+                    if (_commandLineHistory.Count > 0)
+                    {
+                        if (_commandLineHistoryIndex == -1)
+                        {
+                            _commandLineHistoryIndex = _commandLineHistory.Count - 1;
+                        }
+                        else
+                        {
+                            _commandLineHistoryIndex--;
+                        }
+                        if (_commandLineHistoryIndex < 0 || _commandLineHistoryIndex >= _commandLineHistory.Count)
+                        {
+                            _commandLineHistoryIndex = _commandLineHistory.Count - 1;
+                        }
+                        commandLineBox.Text = _commandLineHistory[_commandLineHistoryIndex];
+                    }
+                }
+                if (e.KeyCode == Keys.Down)
+                {
+                    if (_commandLineHistory.Count > 0)
+                    {
+                        if (_commandLineHistoryIndex == -1)
+                        {
+                            _commandLineHistoryIndex = 0;
+                        }
+                        else
+                        {
+                            _commandLineHistoryIndex++;
+                        }
+                        if (_commandLineHistoryIndex < 0 || _commandLineHistoryIndex >= _commandLineHistory.Count)
+                        {
+                            _commandLineHistoryIndex = 0;
+                        }
+                        commandLineBox.Text = _commandLineHistory[_commandLineHistoryIndex];
+                    }
+                }
+            }
         }
     }
 }
