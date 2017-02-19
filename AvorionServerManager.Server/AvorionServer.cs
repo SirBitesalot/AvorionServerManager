@@ -82,12 +82,39 @@ namespace AvorionServerManager.Server
         }
         public void SendCommand(AvorionServerCommand command)
         {
-            Process.StandardInput.WriteLine(command.CommandId);
+            switch (command.ExecutionType)
+            {
+                case CommandExecutionTypes.Lua:
+                    SendLuaCommand(command);
+                    break;
+                case CommandExecutionTypes.Console:
+                    StringBuilder tmpCommandBuilder = new StringBuilder();
+                    tmpCommandBuilder.Append(command.InternalName);
+                    if (command.HasParameters)
+                    {
+                        foreach (AvorionServerCommandParameter currentParameter in command.Parameters)
+                        {
+                            tmpCommandBuilder.Append(" ");
+                            tmpCommandBuilder.Append(currentParameter.Prefix);
+                            tmpCommandBuilder.Append(" ");
+                            tmpCommandBuilder.Append(currentParameter.Content);
+                        }
+                    }
+                    SendConsoleCommand(tmpCommandBuilder.ToString());
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void SendLuaCommand(AvorionServerCommand command)
+        {
+
+            Process.StandardInput.WriteLine(command.InternalId);
             if (command.HasParameters)
             {
-                foreach (string currentParameter in command.Parameters)
+                foreach (AvorionServerCommandParameter currentParameter in command.Parameters)
                 {
-                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(currentParameter);
+                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(currentParameter.Content);
                     Process.StandardInput.BaseStream.Write(buffer, 0, buffer.Length);
                     Process.StandardInput.WriteLine();
                 }

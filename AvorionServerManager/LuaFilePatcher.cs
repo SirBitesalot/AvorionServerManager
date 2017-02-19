@@ -166,25 +166,25 @@ namespace AvorionServerManager
             {
                 if (firstCommand)
                 {
-                    functionLines.Add("if command == \"" + currentDefinition.Id + "\" then");
+                    functionLines.Add("if command == \"" + currentDefinition.InternalId + "\" then");
                     firstCommand = false;
                 }else
                 {
-                    functionLines.Add("elseif command == \"" + currentDefinition.Id + "\" then");
+                    functionLines.Add("elseif command == \"" + currentDefinition.InternalId + "\" then");
                 }
                 string parameterString = string.Empty;
-                if (currentDefinition.ParameterNames != null)
+                if (currentDefinition.HasParameters)
                 {
                     
-                    foreach(string currentParameterName in currentDefinition.ParameterNames)
+                    foreach(AvorionServerCommandParameterDefinition currentParameterDefinition in currentDefinition.ParameterDefinitions)
                     {
-                        functionLines.Add("local "+currentParameterName+"=io.read()");
-                        parameterString += currentParameterName + ",";
+                        functionLines.Add("local "+ currentParameterDefinition.DisplayName.Replace(" ","") + "=io.read()");
+                        parameterString += currentParameterDefinition.DisplayName.Replace(" ", "") + ",";
                     }
-                    functionLines.Add(currentDefinition.LuaName + "(" + parameterString.TrimEnd(',') + ")");
+                    functionLines.Add(currentDefinition.InternalName + "(" + parameterString.TrimEnd(',') + ")");
                 }else
                 {
-                    functionLines.Add(currentDefinition.LuaName + "()");
+                    functionLines.Add(currentDefinition.InternalName + "()");
                 }
             }
             functionLines.Add("end");

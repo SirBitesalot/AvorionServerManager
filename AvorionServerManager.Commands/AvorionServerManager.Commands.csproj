@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="AvorionServerCommand.cs" />
     <Compile Include="AvorionServerCommandDefinition.cs" />
+    <Compile Include="AvorionServerCommandParameter.cs" />
+    <Compile Include="AvorionServerCommandParameterDefinition.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

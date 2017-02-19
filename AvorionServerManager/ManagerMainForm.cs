@@ -35,7 +35,36 @@ namespace AvorionServerManager
             ApiKeyController.Init(Path.Combine(Constants.SettingsFolderName, Constants.ApiKeyFileName));
             //TODO logic
             //List<AvorionServerCommandDefinition> tmpDefinitions = new List<AvorionServerCommandDefinition>();
-            //tmpDefinitions.Add(new AvorionServerCommandDefinition("Save", "Server():save", 1, null));
+            //AvorionServerCommandDefinition tmpSaveDefinition = new AvorionServerCommandDefinition();
+            //tmpSaveDefinition.ExecutionType = CommandExecutionTypes.Lua;
+            //tmpSaveDefinition.DisplayName = "Save";
+            //tmpSaveDefinition.HasParameters = false;
+            //tmpSaveDefinition.InternalId = 1;
+            //tmpSaveDefinition.InternalName = "Server():save";
+            //AvorionServerCommandDefinition tmpStopDefintion = new AvorionServerCommandDefinition();
+            //tmpStopDefintion.ExecutionType = CommandExecutionTypes.Lua;
+            //tmpStopDefintion.DisplayName = "Stop";
+            //tmpStopDefintion.HasParameters = false;
+            //tmpStopDefintion.InternalId = 2;
+            //tmpStopDefintion.InternalName = "Server():stop";
+            //AvorionServerCommandDefinition tmpBroadcastDefinition = new AvorionServerCommandDefinition();
+            //tmpBroadcastDefinition.ExecutionType = CommandExecutionTypes.Lua;
+            //tmpBroadcastDefinition.DisplayName = "Broadcast Chat Message";
+            //tmpBroadcastDefinition.HasParameters = true;
+            //tmpBroadcastDefinition.InternalId = 3;
+            //tmpBroadcastDefinition.InternalName = "Server():broadcastChatMessage";
+            //AvorionServerCommandParameterDefinition tmpsenderParameterDefinition = new AvorionServerCommandParameterDefinition();
+            //tmpsenderParameterDefinition.DisplayName = "Sender";
+            //AvorionServerCommandParameterDefinition tmpMessageTypeParameterDefinition = new AvorionServerCommandParameterDefinition();
+            //tmpMessageTypeParameterDefinition.DisplayName = "Message Type";
+            //AvorionServerCommandParameterDefinition tmpMessageParameterDefinition = new AvorionServerCommandParameterDefinition();
+            //tmpMessageParameterDefinition.DisplayName = "Message";
+            //tmpBroadcastDefinition.AddParameterDefinition(tmpsenderParameterDefinition);
+            //tmpBroadcastDefinition.AddParameterDefinition(tmpMessageTypeParameterDefinition);
+            //tmpBroadcastDefinition.AddParameterDefinition(tmpMessageParameterDefinition);
+            //tmpDefinitions.Add(tmpSaveDefinition);
+            //tmpDefinitions.Add(tmpStopDefintion);
+            //tmpDefinitions.Add(tmpBroadcastDefinition);
             //tmpDefinitions.Add(new AvorionServerCommandDefinition("Stop", "Server():stop", 2, null));
             //tmpDefinitions.Add(new AvorionServerCommandDefinition("Broadcast Message", "Server():broadcastChatMessage", 3, new List<string> { "sender", "messageType", "message" }));
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, Constants.CommandDefinitonsFileName), JsonConvert.SerializeObject(tmpDefinitions, Formatting.Indented));
@@ -180,17 +209,17 @@ namespace AvorionServerManager
             if (commandCombobox.SelectedIndex > -1)
             {
                 AvorionServerCommandDefinition tmpCommandDefinition =(AvorionServerCommandDefinition) commandCombobox.Items[commandCombobox.SelectedIndex];
-                if (tmpCommandDefinition.ParameterNames != null)
+                if (tmpCommandDefinition.HasParameters)
                 {
-                    List<string> tmpParameters = new List<string>();
-                    if (CommandInputPrompt.ShowInputDialog(tmpCommandDefinition.DisplayName, tmpCommandDefinition.ParameterNames, ref tmpParameters) == DialogResult.OK)
+                    List<AvorionServerCommandParameter> tmpParameters = new List<AvorionServerCommandParameter>();
+                    if (CommandInputPrompt.ShowInputDialog(tmpCommandDefinition.DisplayName, tmpCommandDefinition.ParameterDefinitions, ref tmpParameters) == DialogResult.OK)
                     {
-                        CommandsApiData.AddCommand(new AvorionServerCommand(tmpCommandDefinition.DisplayName, tmpCommandDefinition.Id, tmpParameters));
+                        CommandsApiData.AddCommand(new AvorionServerCommand(tmpCommandDefinition,tmpParameters));
                     }
 
                 }else
                 {
-                    _managerController.AddCommand(new AvorionServerCommand(tmpCommandDefinition.DisplayName,tmpCommandDefinition.Id));
+                    _managerController.AddCommand(new AvorionServerCommand(tmpCommandDefinition));
                 }
             }
         }

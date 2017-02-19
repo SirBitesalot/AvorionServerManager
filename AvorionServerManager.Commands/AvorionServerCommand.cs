@@ -5,31 +5,27 @@ namespace AvorionServerManager.Commands
 
     public class AvorionServerCommand
     {
-        public string Name { get; set;}
-        public int CommandId { get; set;}
-        public bool HasParameters { get;  set; }
-        public List<string> Parameters { get; set; }
-      
-        public AvorionServerCommand()
-        {
+        public string InternalName { get; set; }
+        public int InternalId { get; set; }
+        public List<AvorionServerCommandParameter> Parameters { get; set; }
+        public bool HasParameters { get; set; }
+        public CommandExecutionTypes ExecutionType { get; set; }
 
-        }
-        public AvorionServerCommand(string name, int id)
+        public AvorionServerCommand(AvorionServerCommandDefinition definition)
         {
-            Name = name;
-            CommandId = id;
-            HasParameters = false;
+            InternalName = definition.InternalName;
+            InternalId = definition.InternalId;
+            HasParameters = definition.HasParameters;
+            ExecutionType = definition.ExecutionType;
         }
-        public AvorionServerCommand(string name, int id,List<string> parameters)
+        public AvorionServerCommand(AvorionServerCommandDefinition definition, List<AvorionServerCommandParameter> parameters)
         {
-            Name = name;
-            CommandId = id;
-            Parameters = parameters;
-            HasParameters = true;
+            InternalName = definition.InternalName;
+            InternalId = definition.InternalId;
+            HasParameters = definition.HasParameters;
+            ExecutionType = definition.ExecutionType;
+            Parameters = new List<AvorionServerCommandParameter>(parameters);
         }
-        public override string ToString()
-        {
-            return Name;
-        }
+     
     }
 }

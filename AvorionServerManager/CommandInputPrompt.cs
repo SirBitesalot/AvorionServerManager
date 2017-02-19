@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-
+using AvorionServerManager.Commands;
 namespace AvorionServerManager
 {
     class CommandInputPrompt
     {
-        public static DialogResult ShowInputDialog(string title,List<string> parameterNames,ref List<string> parameterValues)
+        public static DialogResult ShowInputDialog(string title,List<AvorionServerCommandParameterDefinition> parameterDefinitions,ref List<AvorionServerCommandParameter> parameters)
         {
-            System.Drawing.Size size = new System.Drawing.Size(500, 60*(parameterNames.Count+1));
+            System.Drawing.Size size = new System.Drawing.Size(500, 60*(parameterDefinitions.Count+1));
             Form inputBox = new Form();
 
             inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -15,10 +15,10 @@ namespace AvorionServerManager
             inputBox.Text = title;
             int counter = 0;
             List<TextBox> textBoxes = new List<TextBox>();
-            foreach (string currentParameterName in parameterNames)
+            foreach (AvorionServerCommandParameterDefinition currentParameterDefinition in parameterDefinitions)
             {
                 Label tmpLabel = new Label();
-                tmpLabel.Text = currentParameterName;
+                tmpLabel.Text = currentParameterDefinition.DisplayName;
                 tmpLabel.Location = new System.Drawing.Point(5, 5 + (60 * counter));
 
                 TextBox tmpTextBox = new TextBox();
@@ -27,6 +27,9 @@ namespace AvorionServerManager
                 inputBox.Controls.Add(tmpLabel);
                 inputBox.Controls.Add(tmpTextBox);
                 textBoxes.Add(tmpTextBox);
+                AvorionServerCommandParameter tmpParameter = new AvorionServerCommandParameter();
+                tmpParameter.Prefix = currentParameterDefinition.Prefix;
+                parameters.Add(tmpParameter);
                 counter++;
             }
 
@@ -50,9 +53,11 @@ namespace AvorionServerManager
             inputBox.CancelButton = cancelButton;
 
             DialogResult result = inputBox.ShowDialog();
+            int tmpParameterIndex = 0;
             foreach(TextBox currentTextBox in textBoxes)
             {
-                parameterValues.Add(currentTextBox.Text);
+                parameters[tmpParameterIndex].Content = currentTextBox.Text;
+                tmpParameterIndex++;
             }
             return result;
         }
