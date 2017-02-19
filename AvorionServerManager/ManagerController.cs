@@ -11,13 +11,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AvorionServerManager.Server;
 using AvorionServerManager.Core;
+using AvorionServerManager.Commands;
 namespace AvorionServerManager
 {
     public class ManagerController : ILoggable
     {
         #region private Variables
-        
-        private string _logfile;
         private Process _process;
         private System.Timers.Timer _backupTimer;
         BackupController _backupController;
@@ -174,14 +173,7 @@ namespace AvorionServerManager
         public void AddCommand(AvorionServerCommand command)
         {
             // CommandsApiData.AddCommand(command);
-            _process.StandardInput.WriteLine(command.CommandId);
-            if (command.HasParameters)
-            {
-                foreach (string currentParameter in command.Parameters)
-                {
-                    _process.StandardInput.WriteLine(currentParameter);
-                }
-            }
+            Server.SendCommand(command);
         }
         private bool CheckConfigs()
         {
@@ -261,16 +253,7 @@ namespace AvorionServerManager
             AvorionServerCommand tmpCommand = CommandsApiData.DequeueCommand();
             if (tmpCommand != null)
             {
-                _process.StandardInput.WriteLine(tmpCommand.CommandId);
-                if (tmpCommand.HasParameters)
-                {
-                    foreach (string currentParameter in tmpCommand.Parameters)
-                    {
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(currentParameter);
-                        _process.StandardInput.BaseStream.Write(buffer, 0, buffer.Length);
-                        _process.StandardInput.WriteLine();
-                    }
-                }
+                Server.SendCommand(tmpCommand);
             }
             else
             {

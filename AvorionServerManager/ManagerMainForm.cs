@@ -14,7 +14,7 @@ using System.Diagnostics;
 using System.Threading;
 using AvorionServerManager.Core;
 using AvorionServerManager.Server;
-
+using AvorionServerManager.Commands;
 namespace AvorionServerManager
 {
     public partial class ManagerMainForm : Form

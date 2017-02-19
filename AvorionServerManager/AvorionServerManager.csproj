@@ -118,8 +118,6 @@
   <ItemGroup>
     <Compile Include="ApiKeyController.cs" />
     <Compile Include="AuthTestController.cs" />
-    <Compile Include="AvorionServerCommand.cs" />
-    <Compile Include="AvorionServerCommandDefinition.cs" />
     <Compile Include="BackupController.cs" />
     <Compile Include="BackupSettings.cs" />
     <Compile Include="LuaFilePatcher.cs" />
@@ -237,6 +235,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AvorionServerManager.Commands\AvorionServerManager.Commands.csproj">
+      <Project>{76fa7cd9-c85a-4ac3-9b44-c6eec591bf17}</Project>
+      <Name>AvorionServerManager.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AvorionServerManager.Core\AvorionServerManager.Core.csproj">
       <Project>{62fd8ef5-8965-4007-aa84-01658c10af8f}</Project>
       <Name>AvorionServerManager.Core</Name>

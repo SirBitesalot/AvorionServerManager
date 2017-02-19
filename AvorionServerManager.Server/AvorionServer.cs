@@ -9,16 +9,16 @@ using AvorionServerManager.Core;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-
+using AvorionServerManager.Commands;
 namespace AvorionServerManager.Server
 {
     public class AvorionServer : ILoggable
     {
         #region DLL Imports
         [DllImport("user32.dll")]
-        public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
-        static extern short VkKeyScan(char ch);
+        private static extern short VkKeyScan(char ch);
         #endregion
         #region Properties
         public bool IsRunning { get; set; }
@@ -83,9 +83,18 @@ namespace AvorionServerManager.Server
         {
             throw new NotImplementedException();
         }
-        public void SendCommand()
+        public void SendCommand(AvorionServerCommand command)
         {
-            throw new NotImplementedException();
+            Process.StandardInput.WriteLine(command.CommandId);
+            if (command.HasParameters)
+            {
+                foreach (string currentParameter in command.Parameters)
+                {
+                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(currentParameter);
+                    Process.StandardInput.BaseStream.Write(buffer, 0, buffer.Length);
+                    Process.StandardInput.WriteLine();
+                }
+            }
         }
         public void SendConsoleCommand(string command)
         {
