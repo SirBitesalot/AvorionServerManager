@@ -429,7 +429,7 @@ namespace AvorionServerManager
 
         private void commandLineBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (_managerController.Server.IsRunning)
+            if (_managerController.Server!=null&&_managerController.Server.IsRunning)
             {
                 if (e.KeyCode == Keys.Enter)
                 {
@@ -437,6 +437,8 @@ namespace AvorionServerManager
                     _managerController.Server.SendConsoleCommand(commandLineBox.Text);
                     _commandLineHistory.Add(commandLineBox.Text);
                     _commandLineHistoryIndex = _commandLineHistory.Count;
+                    Activate();
+                    commandLineBox.Focus();
                     commandLineBox.Text = string.Empty;
                     e.Handled = true;
                     e.SuppressKeyPress = true;
@@ -460,6 +462,10 @@ namespace AvorionServerManager
                         }
                         commandLineBox.Text = _commandLineHistory[_commandLineHistoryIndex];
                     }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    commandLineBox.SelectionStart = Math.Max(0, commandLineBox.Text.Length); // add some logic if length is 0
+                    commandLineBox.SelectionLength = 0;
                 }
                 if (e.KeyCode == Keys.Down)
                 {
@@ -479,7 +485,13 @@ namespace AvorionServerManager
                         }
                         commandLineBox.Text = _commandLineHistory[_commandLineHistoryIndex];
                     }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    commandLineBox.SelectionStart = Math.Max(0, commandLineBox.Text.Length); // add some logic if length is 0
+                    commandLineBox.SelectionLength = 0;
                 }
+                
+
             }
         }
     }
