@@ -6,6 +6,8 @@ using System.Diagnostics;
 using AvorionServerManager.Core;
 using AvorionServerManager.Server;
 using AvorionServerManager.Commands;
+using Newtonsoft.Json;
+
 namespace AvorionServerManager
 {
     public partial class ManagerMainForm : Form
@@ -56,16 +58,89 @@ namespace AvorionServerManager
             //tmpDefinitions.Add(tmpSaveDefinition);
             //tmpDefinitions.Add(tmpStopDefintion);
             //tmpDefinitions.Add(tmpBroadcastDefinition);
-            //tmpDefinitions.Add(new AvorionServerCommandDefinition("Stop", "Server():stop", 2, null));
-            //tmpDefinitions.Add(new AvorionServerCommandDefinition("Broadcast Message", "Server():broadcastChatMessage", 3, new List<string> { "sender", "messageType", "message" }));
+            //#region AddAdminCommand
+            //AvorionServerCommandDefinition tmpAddAdmin = new AvorionServerCommandDefinition();
+            //tmpAddAdmin.ExecutionType = CommandExecutionTypes.Console;
+            //tmpAddAdmin.DisplayName = "Add Admin";
+            //tmpAddAdmin.HasParameters = true;
+            //tmpAddAdmin.InternalName = "/admin --add";
+            //List<AvorionServerCommandParameterDefinition> tmpAddAdminParameters = new List<AvorionServerCommandParameterDefinition>();
+            //AvorionServerCommandParameterDefinition tmpNameParameter = new AvorionServerCommandParameterDefinition();
+            //tmpNameParameter.DisplayName = "Player Name";
+            //tmpNameParameter.Prefix = "--name";
+            //tmpAddAdminParameters.Add(tmpNameParameter);
+            //AvorionServerCommandParameterDefinition tmpIdParameter = new AvorionServerCommandParameterDefinition();
+            //tmpIdParameter.DisplayName = "Player Steam64 Id";
+            //tmpIdParameter.Prefix = "--id";
+            //tmpAddAdminParameters.Add(tmpIdParameter);
+            //tmpAddAdmin.ParameterDefinitions = tmpAddAdminParameters;
+            //tmpDefinitions.Add(tmpAddAdmin);
+            //#endregion
+            //#region RemoveAdminCommand
+            //AvorionServerCommandDefinition tmpRemoveAdmin = new AvorionServerCommandDefinition();
+            //tmpRemoveAdmin.ExecutionType = CommandExecutionTypes.Console;
+            //tmpRemoveAdmin.DisplayName = "Remove Admin";
+            //tmpRemoveAdmin.HasParameters = true;
+            //tmpRemoveAdmin.InternalName = "/admin --remove";
+            //tmpRemoveAdmin.ParameterDefinitions = tmpAddAdminParameters;
+            //tmpDefinitions.Add(tmpRemoveAdmin);
+            //#endregion
+            //#region Blacklist
+            ////Add
+            //AvorionServerCommandDefinition tmpAddBlacklist = new AvorionServerCommandDefinition();
+            //tmpAddBlacklist.ExecutionType = CommandExecutionTypes.Console;
+            //tmpAddBlacklist.DisplayName = "Add to Blacklist";
+            //tmpAddBlacklist.HasParameters = true;
+            //tmpAddBlacklist.InternalName = "/blacklist --add";
+            //tmpAddBlacklist.ParameterDefinitions = tmpAddAdminParameters;
+            //tmpDefinitions.Add(tmpAddBlacklist);
+            ////Remove
+            //AvorionServerCommandDefinition tmpRemoveBlacklist = new AvorionServerCommandDefinition();
+            //tmpRemoveBlacklist.ExecutionType = CommandExecutionTypes.Console;
+            //tmpRemoveBlacklist.DisplayName = "Remove From Blacklist";
+            //tmpRemoveBlacklist.HasParameters = true;
+            //tmpRemoveBlacklist.InternalName = "/blacklist --remove";
+            //tmpRemoveBlacklist.ParameterDefinitions = tmpAddAdminParameters;
+            //tmpDefinitions.Add(tmpRemoveBlacklist);
+            //#endregion
+            //#region accessMode
+            //AvorionServerCommandDefinition tmpActivateWhitelist = new AvorionServerCommandDefinition();
+            //tmpActivateWhitelist.ExecutionType = CommandExecutionTypes.Console;
+            //tmpActivateWhitelist.DisplayName = "Activate Whitelist";
+            //tmpActivateWhitelist.HasParameters = false;
+            //tmpActivateWhitelist.InternalName = "/whitelist --activate";
+            //tmpDefinitions.Add(tmpActivateWhitelist);
+            //AvorionServerCommandDefinition tmpActivateBlacklist = new AvorionServerCommandDefinition();
+            //tmpActivateBlacklist.ExecutionType = CommandExecutionTypes.Console;
+            //tmpActivateBlacklist.DisplayName = "Activate Blacklist";
+            //tmpActivateBlacklist.HasParameters = false;
+            //tmpActivateBlacklist.InternalName = "/blacklist --activate";
+            //tmpDefinitions.Add(tmpActivateBlacklist);
+            //#endregion
+            //#region Kick
+            //AvorionServerCommandDefinition tmpKickCommand = new AvorionServerCommandDefinition();
+            //tmpKickCommand.ExecutionType = CommandExecutionTypes.Console;
+            //tmpKickCommand.DisplayName = "Kick Player";
+            //tmpKickCommand.HasParameters = true;
+            //tmpKickCommand.InternalName = "/kick";
+            //AvorionServerCommandParameterDefinition tmpKickNameParameter = new AvorionServerCommandParameterDefinition();
+            //List<AvorionServerCommandParameterDefinition> tmpKickParameters = new List<AvorionServerCommandParameterDefinition>();
+            //tmpKickNameParameter.DisplayName = "Player Name";
+            //AvorionServerCommandParameterDefinition tmpKickReasonParameter = new AvorionServerCommandParameterDefinition();
+            //tmpKickReasonParameter.DisplayName = "Reason";
+            //tmpKickParameters.Add(tmpKickReasonParameter);
+            //tmpKickParameters.Add(tmpKickNameParameter);
+            //tmpKickCommand.ParameterDefinitions = tmpKickParameters;
+            //tmpDefinitions.Add(tmpKickCommand);
+            //#endregion
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, Constants.CommandDefinitonsFileName), JsonConvert.SerializeObject(tmpDefinitions, Formatting.Indented));
-            //AvorionServerCommand tmpCommand = new AvorionServerCommand("Broadcast Message", 3, new List<string> { "WebRequestTestSender", "0", "Hello from webrequest" });
+            //AvorionServerCommand tmpCommand = new AvorionServerCommand(tmpBroadcastDefinition,new List<AvorionServerCommandParameter> { new AvorionServerCommandParameter { Content="WebRequestTestSender"}, new AvorionServerCommandParameter { Content = "0" }, new AvorionServerCommandParameter { Content = "Hello From Webrequest" } });
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Broadcast.json"), JsonConvert.SerializeObject(tmpCommand, Formatting.Indented));
 
-            //AvorionServerCommand tmpStopCommand = new AvorionServerCommand("Save", 1);
+            //AvorionServerCommand tmpStopCommand = new AvorionServerCommand(tmpStopDefintion);
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Save.json"), JsonConvert.SerializeObject(tmpStopCommand, Formatting.Indented));
 
-            //AvorionServerCommand tmpStartCommand = new AvorionServerCommand("Start", 2);
+            //AvorionServerCommand tmpStartCommand = new AvorionServerCommand(tmpStartCommand);
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Start.json"), JsonConvert.SerializeObject(tmpStartCommand, Formatting.Indented));
         }
 
@@ -205,7 +280,7 @@ namespace AvorionServerManager
                     List<AvorionServerCommandParameter> tmpParameters = new List<AvorionServerCommandParameter>();
                     if (CommandInputPrompt.ShowInputDialog(tmpCommandDefinition.DisplayName, tmpCommandDefinition.ParameterDefinitions, ref tmpParameters) == DialogResult.OK)
                     {
-                        CommandsApiData.AddCommand(new AvorionServerCommand(tmpCommandDefinition,tmpParameters));
+                        _managerController.Server.SendCommand(new AvorionServerCommand(tmpCommandDefinition, tmpParameters));
                     }
 
                 }else
@@ -464,7 +539,7 @@ namespace AvorionServerManager
                     }
                     e.Handled = true;
                     e.SuppressKeyPress = true;
-                    commandLineBox.SelectionStart = Math.Max(0, commandLineBox.Text.Length); // add some logic if length is 0
+                    commandLineBox.SelectionStart = Math.Max(0, commandLineBox.Text.Length); 
                     commandLineBox.SelectionLength = 0;
                 }
                 if (e.KeyCode == Keys.Down)

@@ -193,7 +193,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(133, 17);
+            this.button1.Location = new System.Drawing.Point(215, 17);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -208,7 +208,7 @@
             this.commandCombobox.FormattingEnabled = true;
             this.commandCombobox.Location = new System.Drawing.Point(6, 19);
             this.commandCombobox.Name = "commandCombobox";
-            this.commandCombobox.Size = new System.Drawing.Size(121, 21);
+            this.commandCombobox.Size = new System.Drawing.Size(203, 21);
             this.commandCombobox.TabIndex = 0;
             // 
             // label5

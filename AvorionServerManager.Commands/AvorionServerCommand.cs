@@ -10,7 +10,10 @@ namespace AvorionServerManager.Commands
         public List<AvorionServerCommandParameter> Parameters { get; set; }
         public bool HasParameters { get; set; }
         public CommandExecutionTypes ExecutionType { get; set; }
+        public AvorionServerCommand()
+        {
 
+        }
         public AvorionServerCommand(AvorionServerCommandDefinition definition)
         {
             InternalName = definition.InternalName;
