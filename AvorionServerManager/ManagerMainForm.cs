@@ -118,19 +118,19 @@ namespace AvorionServerManager
             //tmpDefinitions.Add(tmpActivateBlacklist);
             //#endregion
             //#region Kick
-            //AvorionServerCommandDefinition tmpKickCommand = new AvorionServerCommandDefinition();
-            //tmpKickCommand.ExecutionType = CommandExecutionTypes.Console;
-            //tmpKickCommand.DisplayName = "Kick Player";
-            //tmpKickCommand.HasParameters = true;
-            //tmpKickCommand.InternalName = "/kick";
-            //AvorionServerCommandParameterDefinition tmpKickNameParameter = new AvorionServerCommandParameterDefinition();
-            //List<AvorionServerCommandParameterDefinition> tmpKickParameters = new List<AvorionServerCommandParameterDefinition>();
-            //tmpKickNameParameter.DisplayName = "Player Name";
-            //AvorionServerCommandParameterDefinition tmpKickReasonParameter = new AvorionServerCommandParameterDefinition();
-            //tmpKickReasonParameter.DisplayName = "Reason";
-            //tmpKickParameters.Add(tmpKickReasonParameter);
-            //tmpKickParameters.Add(tmpKickNameParameter);
-            //tmpKickCommand.ParameterDefinitions = tmpKickParameters;
+            AvorionServerCommandDefinition tmpKickCommand = new AvorionServerCommandDefinition();
+            tmpKickCommand.ExecutionType = CommandExecutionTypes.Console;
+            tmpKickCommand.DisplayName = "Kick Player";
+            tmpKickCommand.HasParameters = true;
+            tmpKickCommand.InternalName = "/kick";
+            AvorionServerCommandParameterDefinition tmpKickNameParameter = new AvorionServerCommandParameterDefinition();
+            List<AvorionServerCommandParameterDefinition> tmpKickParameters = new List<AvorionServerCommandParameterDefinition>();
+           tmpKickNameParameter.DisplayName = "Player Name";
+            AvorionServerCommandParameterDefinition tmpKickReasonParameter = new AvorionServerCommandParameterDefinition();
+            tmpKickReasonParameter.DisplayName = "Reason";
+            tmpKickParameters.Add(tmpKickReasonParameter);
+            tmpKickParameters.Add(tmpKickNameParameter);
+            tmpKickCommand.ParameterDefinitions = tmpKickParameters;
             //tmpDefinitions.Add(tmpKickCommand);
             //#endregion
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, Constants.CommandDefinitonsFileName), JsonConvert.SerializeObject(tmpDefinitions, Formatting.Indented));
@@ -140,8 +140,8 @@ namespace AvorionServerManager
             //AvorionServerCommand tmpStopCommand = new AvorionServerCommand(tmpStopDefintion);
             //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Save.json"), JsonConvert.SerializeObject(tmpStopCommand, Formatting.Indented));
 
-            //AvorionServerCommand tmpStartCommand = new AvorionServerCommand(tmpStartCommand);
-            //File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Start.json"), JsonConvert.SerializeObject(tmpStartCommand, Formatting.Indented));
+            AvorionServerCommand tmpKickExportCommand = new AvorionServerCommand(tmpKickCommand, new List<AvorionServerCommandParameter> { new AvorionServerCommandParameter { Content="targetPlayer"}, new AvorionServerCommandParameter { Content = "Reason"} });
+            File.WriteAllText(Path.Combine(Constants.SettingsFolderName, "Kick.json"), JsonConvert.SerializeObject(tmpKickExportCommand, Formatting.Indented));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -150,6 +150,7 @@ namespace AvorionServerManager
             _managerController = new ManagerController();
             _managerController.LogEvent += _managerController_LogEvent; ;
             _managerController.ServerStoppedEvent += _managerController_ServerStoppedEvent;
+            CommandsApiData.ManagerController = _managerController;
             ApplyManagerSettings();
             commandCombobox.Items.AddRange(_managerController.AvailableCommandDefinitions.ToArray());
             AddDifficultyDropDownItems();

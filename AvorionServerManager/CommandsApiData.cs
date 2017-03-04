@@ -5,10 +5,23 @@ namespace AvorionServerManager
     static class CommandsApiData
     {
         static Queue<AvorionServerCommand> _commandsToExecute =new Queue<AvorionServerCommand>();
+        public static ManagerController ManagerController { get; set; }
         public static void AddCommand(AvorionServerCommand command)
         {
-            _commandsToExecute.Enqueue(command);
+            switch (command.ExecutionType)
+            {
+                case CommandExecutionTypes.Lua:
+                    _commandsToExecute.Enqueue(command);
+                    break;
+                case CommandExecutionTypes.Console:
+                    ManagerController.Server.SendCommand(command);
+                    break;
+                default:
+                    break;
+            }
+            
         }
+        
         public static AvorionServerCommand DequeueCommand()
         {
             AvorionServerCommand result = null;

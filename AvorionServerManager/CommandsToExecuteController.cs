@@ -14,7 +14,7 @@ namespace AvorionServerManager
             CommandsApiData.AddCommand(value);
             var resp = new HttpResponseMessage(HttpStatusCode.OK);
             StringBuilder resultBuilder = new StringBuilder();
-            resultBuilder.Append("Authorized");
+            resultBuilder.Append("Success");
             resp.Content = new StringContent(resultBuilder.ToString(), System.Text.Encoding.UTF8, "text/plain");
             return resp;
         }

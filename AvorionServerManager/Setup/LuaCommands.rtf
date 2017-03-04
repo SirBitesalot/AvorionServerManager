@@ -751,31 +751,45 @@ ffffffffffffffffffffffffffffffffffffffffffffff0000040000002701ffff030000000000
 \pard\sa200\sl276\slmult1\par
 The Lua interface  is only needed until the real command line interface for windows is in the live branch. The next Avorion Server Manager release will able to use the new command line interface\b . \b0\par
 Commands are dynamically loaded. That means you can create your own command. Some standard command definitions are stored in the file "CommandDefinitions.json" in the "Settings" folder. As the extension implies this is a JSON file and definition must follow the JSON standard. For more Information you can visit Wikipedia:\line {{\field{\*\fldinst{HYPERLINK https://en.wikipedia.org/wiki/JSON }}{\fldrslt{https://en.wikipedia.org/wiki/JSON\ul0\cf0}}}}\f0\fs22\par
-An Example:\line\{\par
+An Example:\line   \{\par
     "DisplayName": "Save",\par
-    "LuaName": "Server():save",\par
-    "Id": 1,\par
-    "ParameterNames": null\par
+    "InternalName": "Server():save",\par
+    "InternalId": 1,\par
+    "ParameterDefinitions": [],\par
+    "ExecutionType": 0,\par
+    "HasParameters": false\par
   \}\par
-DisplayName,LuaName,Id and ParameterNames are Identifiers do not change these.\par
+DisplayName,InternalName,InternalId,ParameterDefinitions,ExecutionType and HasParameters are Identifiers do not change these.\par
 
 \pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 "Save" is the Name which will be displayed in the manager to refere to this command. \line Data type=String\par
 {\pntext\f1\'B7\tab}"Server():save" is the name/syntax in Lua for this command\line Data type=String\line\par
 {\pntext\f1\'B7\tab}"1" this needs to be unique for each command and must be a positive number\line Data type=Number\line\par
-{\pntext\f1\'B7\tab}In this case " ParameterNames" is followed by null. Which means this command does not have Parameters\line Data type=Array of Type String\par
+{\pntext\f1\'B7\tab}In this case " ParameterDefinitions" is an Empty array because this command does not have parameters\par
 {\pntext\f1\'B7\tab}If another command would follow after this definition a comm would be needed after the closing bracket.\par
+{\pntext\f1\'B7\tab}ExecutionType 0 means Lua command (1 would be console)\par
+{\pntext\f1\'B7\tab}HasParameters is false because this command does not have parameters\par
 
 \pard\sa200\sl276\slmult1\par
-Example with Parameters:\line\{\par
-    "DisplayName": "Broadcast Message",\par
-    "LuaName": "Server():broadcastChatMessage",\par
-    "Id": 3,\par
-    "ParameterNames": [\par
-      "sender",\par
-      "messageType",\par
-      "message"\par
-    ]\par
+Example with Parameters:\line "DisplayName": "Broadcast Chat Message",\par
+    "InternalName": "Server():broadcastChatMessage",\par
+    "InternalId": 3,\par
+    "ParameterDefinitions": [\par
+      \{\par
+        "Prefix": "",\par
+        "DisplayName": "Sender"\par
+      \},\par
+      \{\par
+        "Prefix": "",\par
+        "DisplayName": "Message Type"\par
+      \},\par
+      \{\par
+        "Prefix": "",\par
+        "DisplayName": "Message"\par
+      \}\par
+    ],\par
+    "ExecutionType": 0,\par
+    "HasParameters": true\par
   \}\par
-\par
+This Commands has 3 parameters. Each parameter has a Prefix (only relevant for console commands) and a DislayName which is the name that will be displayed in the GUI.\par
 }
  
