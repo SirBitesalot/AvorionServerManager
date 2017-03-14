@@ -120,6 +120,12 @@
     <Compile Include="AuthTestController.cs" />
     <Compile Include="BackupController.cs" />
     <Compile Include="BackupSettings.cs" />
+    <Compile Include="Backup\BackupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backup\BackupForm.Designer.cs">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LuaFilePatcher.cs" />
     <Compile Include="ManagerController.cs" />
     <Compile Include="Setup\DoItProgressForm.cs">
@@ -168,6 +174,9 @@
     <Content Include="THIRD-PARTY-NOTICES.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Backup\BackupForm.resx">
+      <DependentUpon>BackupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManagerMainForm.resx">
       <DependentUpon>ManagerMainForm.cs</DependentUpon>
     </EmbeddedResource>

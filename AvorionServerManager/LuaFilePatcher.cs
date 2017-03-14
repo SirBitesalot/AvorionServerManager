@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using AvorionServerManager.Commands;
+using System.Linq;
+
 namespace AvorionServerManager
 {
     class LuaFilePatcher
@@ -21,7 +23,7 @@ namespace AvorionServerManager
         private List<AvorionServerCommandDefinition> _commandDefinitions;
         public LuaFilePatcher(List<AvorionServerCommandDefinition> commandDefinitions)
         {
-            _commandDefinitions = commandDefinitions;
+            _commandDefinitions = commandDefinitions.Where(item => item.ExecutionType == CommandExecutionTypes.Lua).ToList();
         }
         public static List<string>  RemoveAsmPatches(List<string> serverLuaLines)
         {
